@@ -63,7 +63,7 @@ body {
   align-items: center;
 }
 
-.color {
+.color, .color_background {
   width: 20px;
   height: 20px;
   display: inline-block;
@@ -71,6 +71,7 @@ body {
   margin-left: 5px;
   box-sizing: border-box;
 }
+
 
 .color_active {
   box-shadow: 0 0 5px white;
