@@ -32,7 +32,7 @@ function messageBot() {
         </div>
             `;
             messageBot();
-            
+            chatWidgetInput.value = "";
             scrollX.scrollTop = scrollX.scrollHeight;
         }
       }
