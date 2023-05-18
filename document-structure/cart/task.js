@@ -2,7 +2,7 @@ const productQuantityControl = Array.from(document.querySelectorAll('.product__q
 const productAdd = Array.from(document.querySelectorAll('.product__add'));
 const cartProducts = document.querySelector('.cart__products');
 const cartProduct = document.querySelector('.cart__product');
-const cart__product = Array.from(document.querySelectorAll('.cart__product'));
+
 const arrayId = [];
 
 productQuantityControl.forEach((el) => {
@@ -22,13 +22,29 @@ productAdd.forEach((el => {
      let copyProductNum = Number(product.querySelector('.product__quantity-value').textContent);
      let copyProductAmg = product.querySelector('.product__image').getAttribute('src');
      
+
      if(arrayId.indexOf(+id) < 0){
          cartProducts.innerHTML += `<div class="cart__product" data-id="${id}">
          <img class="cart__product-image" src="${copyProductAmg}">
          <div class="cart__product-count">${copyProductNum}</div>
          </div>`;
+
+     }else{
+      let cart__product = Array.from(document.querySelectorAll('.cart__product'));
+      cart__product.forEach((el) => {
+         
+         if(+el.getAttribute('data-id') === +id){
+           let a = el.querySelector('.cart__product-count');
+           let b = Number(a.textContent);
+           a.textContent = b + copyProductNum;
+         }
+      })
+      // let cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'));
+      //  let newNum = Number(cartProductCount[+id].textContent)
+      //  cartProductCount[+id].textContent = newNum = copyProductNum;
+      //   console.log(+id)
      }
-     arrayId.push(+id)
+     arrayId.push(+id);
 
    });
 }));
