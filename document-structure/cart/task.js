@@ -1,7 +1,7 @@
 const productQuantityControl = Array.from(document.querySelectorAll('.product__quantity-control'));
 const productAdd = Array.from(document.querySelectorAll('.product__add'));
 const cartProducts = document.querySelector('.cart__products');
-const arrayId = [];
+let arrayId = [];
 
 productQuantityControl.forEach((el) => {
    el.addEventListener('click', () => {
@@ -20,8 +20,6 @@ productAdd.forEach((el => {
      let copyProductNum = Number(product.querySelector('.product__quantity-value').textContent);
      let copyProductAmg = product.querySelector('.product__image').getAttribute('src');
      
-     
-
      if(arrayId.indexOf(+id) < 0){
          cartProducts.innerHTML += `<div class="cart__product" data-id="${id}">
          <img class="cart__product-image" src="${copyProductAmg}">
@@ -52,6 +50,10 @@ function xAdd(){
    product__remuve.forEach((el) => {
       el.addEventListener('click', () => {
          el.parentElement.classList.add('remuve');
+         let idX = el.parentElement.getAttribute('data-id');
+         let numberToDelete = +idX;
+         let filteredNumbers = arrayId.filter((number) => number !== numberToDelete);
+         arrayId = filteredNumbers; 
       })
    })
 };
