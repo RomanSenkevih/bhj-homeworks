@@ -1,8 +1,6 @@
 const productQuantityControl = Array.from(document.querySelectorAll('.product__quantity-control'));
 const productAdd = Array.from(document.querySelectorAll('.product__add'));
 const cartProducts = document.querySelector('.cart__products');
-const cartProduct = document.querySelector('.cart__product');
-
 const arrayId = [];
 
 productQuantityControl.forEach((el) => {
@@ -22,11 +20,13 @@ productAdd.forEach((el => {
      let copyProductNum = Number(product.querySelector('.product__quantity-value').textContent);
      let copyProductAmg = product.querySelector('.product__image').getAttribute('src');
      
+     
 
      if(arrayId.indexOf(+id) < 0){
          cartProducts.innerHTML += `<div class="cart__product" data-id="${id}">
          <img class="cart__product-image" src="${copyProductAmg}">
          <div class="cart__product-count">${copyProductNum}</div>
+         <div class="product__remuve">Удалить</div>
          </div>`;
 
      }else{
@@ -39,12 +39,20 @@ productAdd.forEach((el => {
            a.textContent = b + copyProductNum;
          }
       })
-      // let cartProductCount = Array.from(document.querySelectorAll('.cart__product-count'));
-      //  let newNum = Number(cartProductCount[+id].textContent)
-      //  cartProductCount[+id].textContent = newNum = copyProductNum;
-      //   console.log(+id)
-     }
+     
+     };
      arrayId.push(+id);
+     xAdd()
 
    });
+   
 }));
+function xAdd(){
+   let product__remuve = Array.from(document.querySelectorAll('.product__remuve'));
+   product__remuve.forEach((el) => {
+      el.addEventListener('click', () => {
+         el.parentElement.classList.add('remuve');
+      })
+   })
+};
+

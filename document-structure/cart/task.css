@@ -82,6 +82,18 @@ body {
   cursor: pointer;
 }
 
+.product__remuve {
+  background: rgb(250, 4, 4);
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.remuve {
+  display: none;
+}
+
 .product__add:hover {
   opacity: 0.8;
 }
