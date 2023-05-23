@@ -1,33 +1,40 @@
-const hasTooltip = Array.from(document.querySelectorAll('.has-tooltip'));
+const hasTooltips = document.querySelectorAll('.has-tooltip');
 
-hasTooltip.forEach((el) => {
-  el.addEventListener('click', (event) => {
-    let attribute = el.getAttribute('title')
-    el.insertAdjacentHTML('beforeEnd', `<div class="tooltip">${attribute}</div>`);
-    let tooltip = el.querySelector('.tooltip');
-    removeX();
-    tooltip.classList.toggle('tooltip_active');
-    
-
-    let {left, top} = el.getBoundingClientRect();
-    tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top + 25}px`;
-
-    window.addEventListener('scroll', () => {
-        let {left, top} = el.getBoundingClientRect();
-        tooltip.style.left = `${left}px`;
-        tooltip.style.top = `${top + 25}px`;  
-    })
-
-    event.preventDefault();
-    
-  })
+hasTooltips.forEach((elem) => {
+    let text = elem.title;
+    let tmpl = `<div class="tooltip">${text}</div>`;
+    elem.insertAdjacentHTML('afterEnd', tmpl);
 });
 
-function removeX() {
-    let xx = Array.from(document.querySelectorAll('.tooltip')); 
-    xx.forEach((el) => {
-        
-        el.classList.remove('tooltip_active');
-    }) 
-}
+const tooltips = document.querySelectorAll('.tooltip');
+
+for (let i = 0; i < hasTooltips.length; i++) {
+    hasTooltips[i].addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (tooltips[i].classList.contains('tooltip_active')) {
+            tooltips[i].classList.remove('tooltip_active');
+        } else {
+            if (document.querySelector('.tooltip_active')) {
+                document.querySelector('.tooltip_active').classList.remove('tooltip_active');
+            }
+            tooltips[i].classList.add('tooltip_active');
+        };
+
+        let active = document.querySelector('.tooltip_active');
+       
+        window.addEventListener('scroll', () => {
+            let {left, top} = hasTooltips[i].getBoundingClientRect();
+            active.style.left = `${left}px`;
+            active.style.top = `${top + 25}px`;  
+        });
+          
+        try {
+          let {left, top} = hasTooltips[i].getBoundingClientRect();  
+          active.style.left = `${left}px`;
+          active.style.top = `${top + 25}px`;
+        } catch (err) {
+            console.log('Все хорошо)))');
+        };
+    });
+};
