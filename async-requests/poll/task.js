@@ -10,9 +10,6 @@ xhr.addEventListener('load', (e) => {
     let answers = xhr.response.data.answers;
     pollTitle.textContent = title;
 
-    console.log(answers.length)
-    console.log(answers)
-
     for(let i = 0; i < answers.length; i++){
         pollAnswers.insertAdjacentHTML('afterBegin', `<button class="poll__answer">${answers[i]}</button>`);  
     };
